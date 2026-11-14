@@ -15,7 +15,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <main className="relative grid min-h-dvh place-items-center overflow-hidden px-4 py-16">
       <div className="pointer-events-none absolute -left-40 -top-40 size-[36rem] rounded-full bg-ember-500/20 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-40 size-[30rem] rounded-full bg-flame-600/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-40 size-[30rem] rounded-full bg-iris-500/15 blur-3xl" />
       <div className="relative w-full max-w-md">
         <Link href="/" className="font-display text-xl font-bold tracking-tight">
           {settings.brand_name}

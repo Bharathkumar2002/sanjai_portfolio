@@ -23,7 +23,7 @@ export function LoginForm({ next }: { next?: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-ember-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-ember-600 disabled:opacity-60"
+        className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-ember-500 px-6 py-3 text-sm font-medium text-ink-950 transition-colors hover:bg-ember-400 disabled:opacity-60"
       >
         {pending && <Spinner size={16} />}
         {pending ? "Signing in…" : "Sign in"}

@@ -2,17 +2,23 @@ import type { SiteSettings } from "@/lib/types";
 
 /** Mirrors the column defaults of public.site_settings. Used if the row cannot be read. */
 export const defaultSettings: SiteSettings = {
-  brand_name: "Your Name",
-  designer_name: "Your Name",
+  brand_name: "[Your Name]",
+  designer_name: "[Your Name]",
   role_title: "Graphic Designer",
-  hero_greeting: "Hey, I'm a",
-  hero_headline: "Creative\n*Designer*",
-  hero_tagline: "Great design should feel effortless.",
-  hero_intro:
-    "I help ambitious brands look as good as they are — through identity, packaging and visual storytelling.",
+  workplace: "Canto",
+  hero_greeting: "Hi, I'm",
+  hero_headline: "Designing bold visuals that *people remember.*",
+  hero_tagline: "",
+  hero_intro: "I help brands look as good as they are — through posters, campaigns and visual identity.",
   hero_image: null,
-  about_eyebrow: "Behind the Designs",
-  about_headline: "Creating Visual Experiences That Make Brands Stand Out",
+  hero_background_image: null,
+  contact_image: null,
+  resume_url: null,
+  resume_file_name: null,
+  resume_size_bytes: null,
+  resume_updated_at: null,
+  about_eyebrow: "About",
+  about_headline: "Creating visuals that make brands stand out",
   about_intro: "",
   about_bio: "",
   about_philosophy: "",
@@ -21,7 +27,7 @@ export const defaultSettings: SiteSettings = {
   years_experience: null,
   projects_completed: null,
   clients_served: null,
-  availability: "Available for new projects",
+  availability: "",
   contact_email: "",
   contact_phone: "",
   location: "",
@@ -31,16 +37,22 @@ export const defaultSettings: SiteSettings = {
   dribbble_url: "",
   x_url: "",
   seo_title: "Graphic Designer Portfolio",
-  seo_description: "Brand identity, packaging and visual design portfolio.",
+  seo_description: "Graphic design portfolio.",
   og_image: null,
 };
 
 export const PROJECT_CATEGORIES = [
-  "Branding",
-  "Logo Design",
+  "Footwear campaign",
+  "Smartwatch launch",
+  "Audio product",
+  "Tech product",
+  "Product poster",
+  "Brand identity",
+  "Social media",
   "Packaging",
-  "Social Media Design",
-  "Poster Design",
-  "Illustration",
-  "UI/UX Design",
 ] as const;
+
+/** A value still in [brackets] is an unfilled placeholder. */
+export function isPlaceholder(value: string | null | undefined) {
+  return !value || /^\[.*\]$/.test(value.trim());
+}

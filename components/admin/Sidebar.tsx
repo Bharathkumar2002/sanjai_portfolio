@@ -9,11 +9,11 @@ import { CloseIcon, ExternalIcon, GridIcon, InboxIcon, LayersIcon, LogoutIcon, M
 
 const NAV = [
   { href: "/admin", label: "Overview", icon: GridIcon, exact: true },
-  { href: "/admin/projects", label: "Projects", icon: LayersIcon },
+  { href: "/admin/profile", label: "Profile & résumé", icon: TextIcon },
+  { href: "/admin/projects", label: "Portfolio", icon: LayersIcon },
+  { href: "/admin/messages", label: "Messages", icon: InboxIcon },
   { href: "/admin/services", label: "Services", icon: SparkIcon },
   { href: "/admin/clients", label: "Clients", icon: UsersIcon },
-  { href: "/admin/content", label: "Website content", icon: TextIcon },
-  { href: "/admin/messages", label: "Messages", icon: InboxIcon },
 ];
 
 export function Sidebar({ brandName, email, unread }: { brandName: string; email?: string; unread: number }) {
@@ -38,7 +38,7 @@ export function Sidebar({ brandName, email, unread }: { brandName: string; email
             <Icon size={18} />
             <span className="flex-1">{label}</span>
             {href === "/admin/messages" && unread > 0 && (
-              <span className="rounded-full bg-ember-500 px-2 py-0.5 text-[11px] font-semibold text-white" aria-label={`${unread} unread`}>
+              <span className="rounded-full bg-ember-500 px-2 py-0.5 text-[11px] font-semibold text-ink-950" aria-label={`${unread} unread`}>
                 {unread}
               </span>
             )}

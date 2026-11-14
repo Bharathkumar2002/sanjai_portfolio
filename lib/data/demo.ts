@@ -1,7 +1,19 @@
 import "server-only";
-import content from "@/content/placeholder-content.json";
-import type { Client, ProjectWithImages, Service, SiteSettings } from "@/lib/types";
+import rawContent from "@/content/placeholder-content.json";
+import type { Client, Project, ProjectWithImages, Service, SiteSettings } from "@/lib/types";
 import { defaultSettings } from "./defaults";
+
+/** Shape of content/placeholder-content.json (also used by scripts/generate-seed.mjs). */
+type PlaceholderContent = {
+  settings: Partial<SiteSettings>;
+  services: Pick<Service, "title" | "short_description" | "description" | "image_url" | "deliverables">[];
+  clients: Pick<Client, "name" | "logo_url" | "website_url">[];
+  projects: (Omit<Project, "id" | "is_published" | "display_order" | "created_at" | "updated_at"> & {
+    images: { image_url: string; alt_text: string }[];
+  })[];
+};
+
+const content = rawContent as PlaceholderContent;
 
 /**
  * Preview-mode data, used ONLY when Supabase environment variables are missing.

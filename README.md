@@ -1,155 +1,110 @@
-# Sanjai — Graphic Designer Portfolio
+# Graphic Designer Portfolio
 
-A premium, dark, orange-accented portfolio for a graphic designer, with a protected admin dashboard so every piece of content can be edited without touching code.
+A dark, minimal portfolio with a protected dashboard, so the profile, images, portfolio samples and résumé can be updated without touching code.
 
-**Stack:** Next.js 16 (App Router) · TypeScript · Tailwind CSS v4 · Framer Motion · Supabase (Postgres, Auth, Storage) · Vercel
+**Stack:** Next.js 16 · TypeScript · Tailwind CSS v4 · Framer Motion · Supabase (Postgres, Auth, Storage) · Vercel
 
----
+## Still needed from you
 
-## What's inside
+| Item | Where it goes | Until then the site shows |
+|---|---|---|
+| Your friend's **name** | Dashboard → Profile & résumé → Name | `[Your Name]` |
+| **Mobile number** (with country code) | Dashboard → Profile & résumé → Mobile number | `[Mobile number]` (not a tap-to-call link) |
+| **Résumé (PDF)** | Dashboard → Profile & résumé → Résumé | A labelled placeholder PDF |
+| **Headset** and **laptop** artwork | Dashboard → Portfolio → Headset / Laptop concept → Main artwork | Placeholder posters marked "PLACEHOLDER" |
+| Real **email** and social links (optional) | Dashboard → Profile & résumé | `hello@example.com`, no social links |
+| Supabase and Vercel accounts | Steps 2–4 below | Preview mode with starter content |
 
-**Public site**
-- Hero with an automatic orange duotone portrait (any uploaded photo is blended into the gradient), animated headline and an expertise strip.
-- Trusted-by client strip (logos or wordmarks; marquee when there are 4+).
-- About section with biography, philosophy quote and animated stats.
-- Asymmetric featured-projects grid, a filterable `/projects` page and case-study pages at `/projects/[slug]`.
-- Interactive services section with deliverables.
-- Contact form with validation, honeypot and time-trap spam checks, and database-level duplicate and rate limiting.
-- SEO: per-page metadata, Open Graph/Twitter cards, JSON-LD, `sitemap.xml`, `robots.txt`, canonical URLs.
-- Accessibility: semantic landmarks, skip link, keyboard-friendly menu (focus handling, Escape to close), labelled forms, and `prefers-reduced-motion` support.
-
-**Admin dashboard (`/admin`)**
-- **Overview:** counts and recent messages.
-- **Projects:** create, edit and delete; cover and multi-image gallery uploads with alt text, captions and ordering; categories; featured and published toggles; reordering.
-- **Services:** create, edit, delete, show/hide, reorder, with image uploads.
-- **Clients:** add, edit, delete, show/hide, reorder, with logo uploads.
-- **Website content:** hero, about, stats, contact details, social links and SEO.
-- **Messages:** read, unread and delete, with an unread filter and pagination.
-
-Public pages are statically generated and cached (ISR, refreshed every 10 minutes). Every dashboard change revalidates them immediately.
+The workplace starts as **Canto**. The shoe (Kova) and watch (Orbit) posters are original designs for fictional brands, drawn from the supplied references; no brand logos or source photos are reused.
 
 ---
 
-## Project structure
-
-```
-app/
-  (site)/                 public pages: home, /projects, /projects/[slug]
-  admin/login/            sign-in page
-  admin/(dashboard)/      protected dashboard pages
-  sitemap.ts, robots.ts, icon.svg, not-found.tsx
-components/
-  site/                   public UI (Hero, About, ProjectCard, Services, Contact, Footer…)
-  admin/                  dashboard UI (forms, tables, uploads, toasts)
-  motion/, ui/            animation helpers, icons, buttons
-lib/
-  data/public.ts          all public reads (anon key, RLS-filtered)
-  actions/                server actions (contact form + admin/*)
-  admin/                  auth guard, storage helpers, browser upload
-  supabase/               server / browser / proxy clients, env
-  validation.ts           zod schemas for every form
-content/placeholder-content.json   single source for seed data and preview mode
-supabase/migrations/      SQL schema, RLS, storage, functions
-supabase/seed.sql         generated placeholder content (fictional brands)
-scripts/                  seed generator + database security tests
-proxy.ts                  session refresh and /admin guard (Next 16's "middleware")
-```
-
----
-
-## 1. Run locally (preview mode)
+## 1. Run locally
 
 ```bash
 npm install
-npm run dev
+npm run dev        # http://localhost:3000
 ```
 
-Open http://localhost:3000. Without Supabase keys the site runs in **preview mode** with placeholder content (a small badge says so), and `/admin` explains how to connect a database.
-
----
+Without Supabase keys the public site runs in **preview mode** with the starter content from `content/placeholder-content.json` and `public/portfolio/`. `/admin` shows a setup message.
 
 ## 2. Set up Supabase
 
 1. Create a project at [supabase.com](https://supabase.com).
-2. In **SQL Editor**, run each file in `supabase/migrations/` **in filename order**:
-   1. `…100_schema.sql` creates the tables, constraints, indexes and timestamps.
-   2. `…200_security.sql` sets up Row Level Security and the contact-form RPC.
-   3. `…300_storage.sql` creates the `media` bucket and its policies.
-   4. `…400_functions.sql` adds the atomic gallery update.
-
-   If you use the Supabase CLI instead, run `supabase link` then `supabase db push`.
-3. *(Optional)* Run `supabase/seed.sql` to load the placeholder portfolio. Every brand in it is fictional; replace them with real work before launch.
-4. **Auth → Sign In / Providers → Email:** turn **off** "Allow new users to sign up". New users can't reach the dashboard anyway (they default to the `viewer` role), but there's no reason to allow sign-ups.
-5. **Create the first admin.** Go to **Authentication → Users → Add user**, enter an email and a strong password, and tick "Auto confirm". Then run:
-
+2. Open **SQL Editor** and run each file in `supabase/migrations/` **in filename order**, then `supabase/seed.sql`. This creates the tables, the access rules, the `media` storage bucket (images + PDF résumés, 10 MB max) and the starter content.
+3. **Authentication → Sign In / Providers → Email:** turn off **Allow new users to sign up**.
+4. **Authentication → Users → Add user:** create the admin with email and password, and tick *Auto confirm*. Then run in the SQL Editor:
    ```sql
-   update public.profiles set role = 'admin' where email = 'you@example.com';
+   update public.profiles set role = 'admin' where email = 'admin@example.com';
    ```
-6. Copy `.env.example` to `.env.local` and fill it in. The values are in **Project Settings → API**:
+5. Copy `.env.example` to `.env.local` and fill it in (values from **Project Settings → API**):
 
    | Variable | Value |
    |---|---|
    | `NEXT_PUBLIC_SUPABASE_URL` | Project URL |
-   | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key (`sb_publishable_…`) or the legacy anon key |
-   | `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` locally, your domain in production |
+   | `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Publishable key (`sb_publishable_…`) or legacy anon key |
+   | `NEXT_PUBLIC_SITE_URL` | `http://localhost:3000` locally, the live URL on Vercel |
    | `CONTACT_HASH_SALT` | Any long random string |
 
-   The **service-role key is never needed.** Don't add it anywhere.
-7. Restart `npm run dev` and sign in at `/admin`.
+   Never add the **service-role** key; the app doesn't use it.
+6. Restart `npm run dev` and sign in at **/admin**.
 
----
+## 3. Move the starter files into Supabase Storage (recommended)
 
-## 3. Deploy (GitHub + Vercel)
+The seed points images and the résumé at bundled files in `public/portfolio/`. This one-off command uploads them to the Storage bucket and updates the database, signing in as your admin user. It's safe to re-run.
 
-1. Create an empty GitHub repository, then push:
+```powershell
+# PowerShell
+$env:ADMIN_EMAIL="admin@example.com"; $env:ADMIN_PASSWORD="your-password"; npm run assets:upload
+```
+```bash
+# macOS / Linux
+ADMIN_EMAIL=admin@example.com ADMIN_PASSWORD=your-password npm run assets:upload
+```
+
+Anything you upload or replace from the dashboard goes straight to Storage, and replaced files are deleted automatically.
+
+## 4. Deploy on Vercel
+
+1. Push the repository to GitHub:
    ```bash
    git remote add origin https://github.com/<you>/<repo>.git
    git push -u origin main
    ```
-2. On [vercel.com](https://vercel.com), choose **Add New → Project** and import the repository. Vercel detects Next.js; keep the defaults.
-3. Add the four environment variables from the table above. Set `NEXT_PUBLIC_SITE_URL` to the production URL, e.g. `https://sanjai.design`.
-4. Deploy. Every push to `main` redeploys automatically.
-5. After adding a custom domain, update `NEXT_PUBLIC_SITE_URL` and redeploy so the sitemap, canonical and Open Graph URLs are correct.
+2. At [vercel.com/new](https://vercel.com/new), import the repository and keep the detected Next.js settings.
+3. Under **Environment Variables**, add the four variables from step 2.5. Set `NEXT_PUBLIC_SITE_URL` to the production URL.
+4. Click **Deploy**. Later pushes to `main` redeploy automatically. If you add a custom domain, update `NEXT_PUBLIC_SITE_URL` and redeploy.
 
 ---
 
-## Editing content (for the designer)
+## Using the dashboard
 
-- **Headlines:** wrap words in `*asterisks*` to set them in the italic serif accent, and press Enter for a line break. For example, `Creative` + new line + `*Designer*`.
-- **Long text:** leave a blank line between paragraphs.
-- **Images** upload directly from the dashboard (JPG, PNG, WebP, AVIF, GIF or SVG, up to 10 MB). Replaced or removed images are deleted from storage automatically when you save.
-- **Featured projects:** the home page shows up to 5 published projects marked as featured, in display order.
-- **Services** feed three places: the hero strip, the services section and the contact form's project-type list.
-- **Empty fields are hidden** on the site. For example, an empty phone number won't show.
+- **Profile & résumé:**
+  - Details: name, role, workplace, mobile, email, location and availability.
+  - Résumé: upload, replace or remove the PDF.
+  - Banner: the front photo, the background artwork and the headline.
+  - Also: the contact photo, about text, social links and search/share settings.
+- **Portfolio:** replace each sample's artwork, edit its story, publish or hide it, and reorder.
+- **Messages:** enquiries from the contact form.
+- **Services** and **Clients:** the "What I do" cards and the optional logo strip, which stays hidden while there are no clients.
 
----
+Tips:
+- Wrap words in `*asterisks*` in a headline to colour them.
+- Leave a blank line between paragraphs.
+- A transparent-background PNG/WebP works best for the banner photo.
 
-## Security model
+## Security
 
-- **Row Level Security everywhere.** Visitors can read only published projects, services and clients, plus site settings. Only users whose profile role is `admin` can write anything or read messages. Users can't promote themselves.
-- **Contact messages** can only be created through `submit_contact_message()`. It validates input, rejects duplicates (same email and message within 24 h) and rate-limits: 3 per email per hour, 5 per IP per hour, 100 site-wide per hour. Only a salted hash of the IP is stored.
-- **Three layers of authorization for admin actions:**
-  1. The proxy redirects anonymous visitors.
-  2. Every page and server action re-checks the admin role.
-  3. RLS enforces the same rules in the database.
-- **Validation:** all form input goes through zod (server-side), and image URLs are restricted to Supabase Storage and Unsplash.
-- **Headers:** security headers are set in `next.config.ts`, and `/admin` is excluded from search engines.
-
----
+- Row Level Security on every table. Visitors can read only published content. Only users whose profile role is `admin` can change content, read messages or upload files.
+- The contact form goes through a database function that validates input and rate-limits submissions.
+- The proxy, every dashboard page and every server action check for an admin. RLS enforces the same rules again in the database.
 
 ## Scripts
 
-| Command | What it does |
+| Command | Purpose |
 |---|---|
-| `npm run dev` | Development server |
-| `npm run build` / `npm start` | Production build and server |
-| `npm run lint` / `npm run typecheck` | ESLint and TypeScript checks |
-| `npm run test:db` | Runs the real migrations and seed in an in-process Postgres (PGlite) and verifies 50+ RLS, RPC and constraint rules |
+| `npm run dev` / `build` / `start` | Develop, build, serve |
+| `npm run typecheck` / `lint` | TypeScript and ESLint |
+| `npm run test:db` | Runs all migrations and the seed in an in-process Postgres and checks the access rules |
 | `npm run db:seed` | Regenerates `supabase/seed.sql` from `content/placeholder-content.json` |
-
----
-
-## Notes
-
-- In `next dev`, images are served unoptimized so local development works on networks where Next's image optimizer refuses the upstream address (for example, NAT64 mobile hotspots). Production builds always optimize images.
-- `AGENTS.md` is generated by `next dev` and is safe to keep committed.
+| `npm run assets:upload` | Moves starter files into Supabase Storage (step 3) |

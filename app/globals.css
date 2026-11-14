@@ -4,31 +4,34 @@
    Design tokens
    --------------------------------------------------------------------------- */
 @theme {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+  /* One family everywhere, with system fallbacks that keep similar proportions */
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-sans);
 
-  /* Near-black neutrals with a warm undertone */
-  --color-ink-950: #080808;
-  --color-ink-900: #0f0f0f;
-  --color-ink-850: #141414;
-  --color-ink-800: #1a1a1a;
-  --color-ink-700: #242424;
-  --color-ink-600: #303030;
-  --color-ink-500: #4a4845;
+  /* Cool charcoal neutrals */
+  --color-ink-950: #0b0b10;
+  --color-ink-900: #111118;
+  --color-ink-850: #16161e;
+  --color-ink-800: #1c1c25;
+  --color-ink-700: #26262f;
+  --color-ink-600: #33333d;
+  --color-ink-500: #4b4a55;
 
-  /* Warm off-white text scale */
-  --color-bone: #f4f1ec;
-  --color-mist: #b5b1ab;
-  --color-smoke: #7d7a75;
+  /* Text scale (all ≥ 4.5:1 on ink-950) */
+  --color-bone: #f5f3f7;
+  --color-mist: #b8b6c2;
+  --color-smoke: #8c8a96;
 
-  /* Accent: ember orange → flame red */
-  --color-ember-300: #ffb38a;
-  --color-ember-400: #ff8a4c;
-  --color-ember-500: #ff5f1f;
-  --color-ember-600: #ee4512;
-  --color-flame-600: #d42a16;
-  --color-flame-800: #7c1408;
+  /* Accent: coral, taken from the portrait. Filled accent surfaces use dark text (6.4:1). */
+  --color-ember-300: #ffb1a8;
+  --color-ember-400: #ff7a6b;
+  --color-ember-500: #ff5a4e;
+  --color-ember-600: #e8463b;
+
+  /* Secondary: soft violet, from the illustration's brush strokes */
+  --color-iris-300: #d9cfff;
+  --color-iris-400: #b9a7ff;
+  --color-iris-500: #9b87f5;
 
   --radius-4xl: 2rem;
   --radius-5xl: 2.5rem;

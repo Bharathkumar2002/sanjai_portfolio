@@ -1,50 +1,36 @@
 import type { Service } from "@/lib/types";
+import { pad2 } from "@/lib/utils";
 import { Reveal } from "@/components/motion/Reveal";
-import { PillLink } from "@/components/ui/PillLink";
 import { SectionHeading } from "./SectionHeading";
-import { ServicesExplorer } from "./ServicesExplorer";
 
 export function Services({ services }: { services: Service[] }) {
+  if (services.length === 0) return null;
+
   return (
-    <section id="services" aria-labelledby="services-title" className="container-page py-12 sm:py-16">
-      <div className="rounded-5xl bg-ink-900 px-5 py-16 ring-1 ring-white/5 sm:px-10 sm:py-24 lg:px-14">
-        <SectionHeading
-          eyebrow="What I Do"
-          title="Services built to make your brand *unforgettable*"
-          titleId="services-title"
-          aside={
-            <p className="text-[15px] leading-relaxed text-mist">
-              Every engagement is tailored, but these are the disciplines I bring to the table — individually or as one connected system.
-            </p>
-          }
-        />
-
-        <div className="mt-14 sm:mt-20">
-          {services.length > 0 ? (
-            <ServicesExplorer services={services} />
-          ) : (
-            <p className="rounded-3xl border border-dashed border-white/15 p-10 text-mist">
-              Services are being updated. Get in touch to discuss what you need.
-            </p>
-          )}
-        </div>
-
-        <Reveal className="mt-16 sm:mt-24">
-          <div className="grain relative flex flex-col items-start justify-between gap-8 overflow-hidden rounded-4xl bg-[radial-gradient(120%_140%_at_0%_0%,#ff8a4c_0%,#ff5f1f_40%,#c92a12_100%)] p-8 sm:p-12 lg:flex-row lg:items-center">
-            <div>
-              <p className="font-display text-[clamp(1.9rem,4vw,3.2rem)] font-semibold leading-[1.02] tracking-[-0.04em] text-white text-balance">
-                Have a project in mind?
-              </p>
-              <p className="mt-3 max-w-lg text-white/85">
-                Tell me about your brand and your goals, and I&apos;ll get back to you with ideas and next steps.
-              </p>
-            </div>
-            <PillLink href="/#contact" variant="dark" size="lg" className="shrink-0">
-              Start a project
-            </PillLink>
-          </div>
-        </Reveal>
-      </div>
+    <section id="services" aria-labelledby="services-title" className="container-page py-16 sm:py-24">
+      <SectionHeading eyebrow="What I do" title="Services" titleId="services-title" />
+      <ul className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-2 xl:grid-cols-4">
+        {services.map((service, i) => (
+          <li key={service.id}>
+            <Reveal delay={(i % 4) * 0.06} className="h-full">
+              <article className="flex h-full flex-col rounded-4xl bg-ink-900 p-7 ring-1 ring-white/[0.06]">
+                <span className="text-sm font-semibold tabular-nums text-ember-400">{pad2(i + 1)}</span>
+                <h3 className="mt-8 text-xl font-bold tracking-tight text-bone">{service.title}</h3>
+                <p className="mt-3 flex-1 text-[15px] leading-relaxed text-mist">{service.description || service.short_description}</p>
+                {service.deliverables.length > 0 && (
+                  <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${service.title} deliverables`}>
+                    {service.deliverables.slice(0, 4).map((d) => (
+                      <li key={d} className="rounded-full bg-white/[0.05] px-3 py-1 text-xs font-medium text-mist ring-1 ring-inset ring-white/10">
+                        {d}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            </Reveal>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

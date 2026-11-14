@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:db": "node scripts/test-db.mjs",
-    "db:seed": "node scripts/generate-seed.mjs"
+    "db:seed": "node scripts/generate-seed.mjs",
+    "assets:upload": "node --env-file=.env.local scripts/upload-starter-assets.mjs"
   },
   "engines": {
     "node": ">=20.9.0"

@@ -21,15 +21,17 @@ export default async function DashboardLayout({ children }: { children: React.Re
   if (session.status === "unconfigured") {
     return (
       <Centered>
-        <h1 className="font-display text-2xl font-semibold">Connect Supabase to use the dashboard</h1>
+        <p className="inline-flex rounded-full bg-ember-500/15 px-3 py-1 text-xs font-semibold text-ember-300">Setup needed</p>
+        <h1 className="mt-4 text-2xl font-bold tracking-tight">Connect Supabase to use the dashboard</h1>
         <p className="mt-3 text-sm leading-relaxed text-mist">
-          The website is running in preview mode with placeholder content. To manage content:
+          The public site is running in <strong className="text-bone">preview mode</strong> with the starter content, so it
+          still works. Editing, uploads and the contact form need Supabase:
         </p>
-        <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm text-mist">
-          <li>Create a Supabase project and run the SQL files in <code className="text-bone">supabase/migrations</code>.</li>
-          <li>Copy <code className="text-bone">.env.example</code> to <code className="text-bone">.env.local</code> and add your project URL and publishable key.</li>
-          <li>Create your admin user and promote it (see README → “Create the first admin”).</li>
-          <li>Restart the dev server.</li>
+        <ol className="mt-4 list-decimal space-y-2 pl-5 text-sm leading-relaxed text-mist">
+          <li>Create a Supabase project, then run every file in <code className="text-bone">supabase/migrations</code> (in order) and <code className="text-bone">supabase/seed.sql</code> in the SQL editor.</li>
+          <li>Copy <code className="text-bone">.env.example</code> to <code className="text-bone">.env.local</code> and fill in <code className="text-bone">NEXT_PUBLIC_SUPABASE_URL</code> and <code className="text-bone">NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>.</li>
+          <li>Create your admin user in Supabase Auth and promote it to admin (README, step 2).</li>
+          <li>Restart <code className="text-bone">npm run dev</code> and sign in at <code className="text-bone">/admin</code>.</li>
         </ol>
         <Link href="/" className="mt-6 inline-block text-sm text-ember-300 hover:underline">← Back to website</Link>
       </Centered>

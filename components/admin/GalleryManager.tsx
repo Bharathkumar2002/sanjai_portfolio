@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { uploadImage, validateImage } from "@/lib/admin/upload";
+import { uploadImage, validateUpload } from "@/lib/admin/upload";
 import { useToast } from "./ToastProvider";
 import { inputClass } from "./fields";
 import { ChevronDown, ChevronUp, PlusIcon, Spinner, TrashIcon } from "@/components/ui/icons";
@@ -31,7 +31,7 @@ export function GalleryManager({ initial, error, onChange }: { initial: Initial[
     if (!files?.length) return;
     const list = Array.from(files).slice(0, MAX_IMAGES - items.length);
     const valid = list.filter((f) => {
-      const problem = validateImage(f);
+      const problem = validateUpload(f, "image");
       if (problem) push("error", problem);
       return !problem;
     });

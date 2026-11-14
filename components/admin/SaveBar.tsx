@@ -13,7 +13,7 @@ export function SaveBar({ pending, cancelHref, label = "Save changes" }: { pendi
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex items-center gap-2 rounded-full bg-ember-500 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ember-600 disabled:opacity-60"
+          className="inline-flex items-center gap-2 rounded-full bg-ember-500 px-6 py-2.5 text-sm font-medium text-ink-950 transition-colors hover:bg-ember-400 disabled:opacity-60"
         >
           {pending && <Spinner size={16} />}
           {pending ? "Saving…" : label}

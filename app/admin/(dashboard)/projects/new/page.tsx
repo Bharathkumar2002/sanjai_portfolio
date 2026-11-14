@@ -12,7 +12,7 @@ export default async function NewProjectPage() {
 
   return (
     <>
-      <PageHeader title="New project" back={{ href: "/admin/projects", label: "Projects" }} />
+      <PageHeader title="New sample" back={{ href: "/admin/projects", label: "Portfolio" }} />
       <ProjectForm categories={categories} />
     </>
   );

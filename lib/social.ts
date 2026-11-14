@@ -14,9 +14,8 @@ export function socialLinks(s: SiteSettings): SocialLink[] {
 }
 
 export const NAV_LINKS = [
-  { label: "Home", href: "/#home", id: "home" },
+  { label: "Work", href: "/#work", id: "work" },
   { label: "About", href: "/#about", id: "about" },
-  { label: "Projects", href: "/#projects", id: "projects" },
   { label: "Services", href: "/#services", id: "services" },
   { label: "Contact", href: "/#contact", id: "contact" },
 ] as const;

@@ -17,7 +17,7 @@ export function Emphasis({ text, accentClassName }: { text: string; accentClassN
             part.startsWith("*") && part.endsWith("*") && part.length > 2 ? (
               <em
                 key={pi}
-                className={cn("font-serif font-normal italic tracking-[-0.01em]", accentClassName)}
+                className={cn("not-italic", accentClassName)}
               >
                 {part.slice(1, -1)}
               </em>

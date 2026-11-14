@@ -34,7 +34,7 @@ export default async function EditProjectPage({ params, searchParams }: Props) {
       <FlashToast message={created ? "Project created." : null} />
       <PageHeader
         title={p.title}
-        back={{ href: "/admin/projects", label: "Projects" }}
+        back={{ href: "/admin/projects", label: "Portfolio" }}
         action={
           <div className="flex items-center gap-3">
             {p.is_published ? <Badge tone="success">Published</Badge> : <Badge tone="muted">Draft</Badge>}

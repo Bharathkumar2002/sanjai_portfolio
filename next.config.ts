@@ -3,11 +3,11 @@ import type { NextConfig } from "next";
 type RemotePattern = NonNullable<NonNullable<NextConfig["images"]>["remotePatterns"]>[number];
 
 /**
- * Images may only come from Supabase Storage (uploads) or Unsplash (placeholder seed content).
+ * Remote images may only come from Supabase Storage (dashboard uploads).
+ * Bundled starter images live in /public/portfolio and need no pattern.
  * The exact Supabase host is read from the environment so custom domains also work.
  */
 const remotePatterns: RemotePattern[] = [
-  { protocol: "https", hostname: "images.unsplash.com" },
   { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
 ];
 

@@ -1,75 +1,74 @@
+import Image from "next/image";
 import type { SiteSettings } from "@/lib/types";
+import { isPlaceholder } from "@/lib/data/defaults";
 import { socialLinks } from "@/lib/social";
+import { telHref } from "@/lib/utils";
 import { Reveal } from "@/components/motion/Reveal";
-import { MailIcon, PinIcon } from "@/components/ui/icons";
+import { MailIcon, PhoneIcon } from "@/components/ui/icons";
 import { ContactForm } from "./ContactForm";
 
 export function Contact({ settings: s, projectTypes }: { settings: SiteSettings; projectTypes: string[] }) {
   const socials = socialLinks(s);
+  const photo = s.contact_image ?? s.hero_image;
+  const phoneHref = telHref(s.contact_phone);
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="container-page pb-16 pt-12 sm:pb-24 sm:pt-16">
+    <section id="contact" aria-labelledby="contact-title" className="container-page py-16 sm:py-24">
       <div className="grid gap-4 lg:grid-cols-12">
         <Reveal className="lg:col-span-5">
-          <div className="grain relative flex h-full min-h-[30rem] flex-col justify-between overflow-hidden rounded-4xl bg-[radial-gradient(140%_100%_at_0%_0%,#ff9a5c_0%,#ff5f1f_38%,#d42a16_75%,#8f1909_100%)] p-8 sm:p-10 lg:p-12">
-            <div>
-              <p className="text-sm font-medium text-white/85">Contact</p>
-              <h2 id="contact-title" className="mt-4 font-display text-[clamp(2.5rem,5vw,4.2rem)] font-semibold leading-[0.98] tracking-[-0.045em] text-white text-balance">
-                Let&apos;s create something <em className="font-serif font-normal italic">remarkable.</em>
-              </h2>
-              {s.availability && (
-                <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-black/20 px-3.5 py-1.5 text-[13px] text-white backdrop-blur-md">
-                  <span className="size-1.5 rounded-full bg-white" aria-hidden="true" />
-                  {s.availability}
-                </p>
-              )}
-            </div>
+          <div className="relative isolate flex h-full min-h-[34rem] flex-col overflow-hidden rounded-4xl bg-[linear-gradient(160deg,#ff7a6b_0%,#ff5a4e_50%,#c06be0_100%)] p-8 sm:p-10">
+            <p className="text-sm font-semibold text-ink-950/70">Contact</p>
+            <h2 id="contact-title" className="mt-3 max-w-xs text-[clamp(2.2rem,4.4vw,3.4rem)] font-extrabold leading-[1.02] tracking-[-0.035em] text-ink-950 text-balance">
+              Let&apos;s make something great.
+            </h2>
 
-            <div className="mt-12 space-y-6">
+            <ul className="relative z-10 mt-8 space-y-3 text-[15px] font-semibold text-ink-950">
               {s.contact_email && (
-                <a href={`mailto:${s.contact_email}`} className="group flex items-center gap-3 text-white">
-                  <span className="grid size-11 place-items-center rounded-full bg-white/15 transition-colors group-hover:bg-white group-hover:text-ember-600">
-                    <MailIcon size={18} />
-                  </span>
-                  <span className="break-all font-display text-xl font-medium tracking-tight underline-offset-4 group-hover:underline sm:text-2xl">
-                    {s.contact_email}
-                  </span>
-                </a>
+                <li>
+                  <a href={`mailto:${s.contact_email}`} className="inline-flex items-center gap-3 rounded-full bg-white/25 px-4 py-2 backdrop-blur-sm hover:bg-white/40">
+                    <MailIcon size={18} /> <span className="break-all">{s.contact_email}</span>
+                  </a>
+                </li>
               )}
-              {(s.location || s.contact_phone) && (
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/85">
-                  {s.location && (
-                    <span className="inline-flex items-center gap-2">
-                      <PinIcon size={16} /> {s.location}
+              {s.contact_phone && !isPlaceholder(s.contact_phone) && (
+                <li>
+                  {phoneHref ? (
+                    <a href={phoneHref} className="inline-flex items-center gap-3 rounded-full bg-white/25 px-4 py-2 backdrop-blur-sm hover:bg-white/40">
+                      <PhoneIcon size={18} /> {s.contact_phone}
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-3 rounded-full bg-white/25 px-4 py-2">
+                      <PhoneIcon size={18} /> {s.contact_phone}
                     </span>
                   )}
-                  {s.contact_phone && <a href={`tel:${s.contact_phone.replace(/[^+\d]/g, "")}`} className="hover:underline">{s.contact_phone}</a>}
-                </div>
+                </li>
               )}
-              {socials.length > 0 && (
-                <ul className="flex flex-wrap gap-2" aria-label="Social profiles">
-                  {socials.map((link) => (
-                    <li key={link.label}>
-                      <a
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex rounded-full bg-black/20 px-4 py-2 text-[13px] font-medium text-white ring-1 ring-inset ring-white/20 backdrop-blur-md transition-colors hover:bg-white hover:text-ink-950"
-                      >
-                        {link.label} ↗
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
+            </ul>
+
+            {socials.length > 0 && (
+              <ul className="relative z-10 mt-4 flex flex-wrap gap-2" aria-label="Social profiles">
+                {socials.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-full px-3 py-1.5 text-[13px] font-semibold text-ink-950 ring-1 ring-inset ring-ink-950/30 hover:bg-ink-950 hover:text-bone">
+                      {link.label} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {photo && (
+              <div className="pointer-events-none absolute -bottom-2 -right-8 -z-10 h-[62%] w-[78%] sm:w-[70%] lg:w-[82%]">
+                <Image src={photo} alt="" fill sizes="(min-width: 1024px) 30vw, 70vw" className="object-contain object-bottom drop-shadow-[0_20px_40px_rgba(0,0,0,0.35)]" />
+              </div>
+            )}
           </div>
         </Reveal>
 
         <Reveal delay={0.08} className="lg:col-span-7">
-          <div className="h-full rounded-4xl bg-ink-900 p-6 ring-1 ring-white/5 sm:p-10 lg:p-12">
+          <div className="h-full rounded-4xl bg-ink-900 p-6 ring-1 ring-white/[0.06] sm:p-10 lg:p-12">
             <p className="mb-8 max-w-md text-[15px] leading-relaxed text-mist">
-              Share a few details about your project and I&apos;ll get back to you personally.
+              Tell me a little about your project and I&apos;ll get back to you personally.
             </p>
             <ContactForm projectTypes={projectTypes} />
           </div>

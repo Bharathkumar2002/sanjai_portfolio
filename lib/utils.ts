@@ -45,17 +45,49 @@ export function storagePathFromUrl(url: string | null | undefined): string | nul
   }
 }
 
-/** Images must come from our Supabase storage or Unsplash (matches next.config images.remotePatterns). */
-export function isAllowedImageUrl(url: string): boolean {
+/** Bundled starter files in /public/portfolio (replaceable from the dashboard). */
+const BUNDLED_PREFIX = "/portfolio/";
+
+/**
+ * Media (images and the résumé) must be either a bundled starter file or a file
+ * in our Supabase Storage bucket. Matches next.config images.remotePatterns.
+ */
+export function isAllowedMediaUrl(url: string): boolean {
+  if (url.startsWith(BUNDLED_PREFIX) && !url.includes("..")) return true;
   try {
     const u = new URL(url);
     if (u.protocol !== "https:" && !(u.protocol === "http:" && u.hostname === "127.0.0.1")) return false;
-    if (u.hostname === "images.unsplash.com") return true;
     if (storagePathFromUrl(url)) return true;
     return u.hostname.endsWith(".supabase.co") && u.pathname.startsWith("/storage/v1/object/public/");
   } catch {
     return false;
   }
+}
+
+export function isPdfUrl(url: string) {
+  return /\.pdf($|\?)/i.test(url);
+}
+
+/**
+ * Link that downloads the résumé. Storage is on another origin, where the HTML
+ * `download` attribute is ignored, so Supabase's `?download=` parameter is used.
+ */
+export function resumeDownloadHref(url: string, fileName: string | null) {
+  if (url.startsWith("/")) return url;
+  const sep = url.includes("?") ? "&" : "?";
+  return `${url}${sep}download=${encodeURIComponent(fileName || "resume.pdf")}`;
+}
+
+export function formatBytes(bytes: number | null | undefined) {
+  if (!bytes) return "";
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+/** tel: href for a phone number, or null when it's empty or still a placeholder. */
+export function telHref(phone: string | null | undefined) {
+  const digits = (phone ?? "").replace(/[^+\d]/g, "");
+  return digits.replace(/\D/g, "").length >= 6 ? `tel:${digits}` : null;
 }
 
 export function isSvg(url: string | null | undefined) {

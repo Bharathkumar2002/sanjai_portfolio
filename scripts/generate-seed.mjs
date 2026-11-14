@@ -29,7 +29,7 @@ const cols = Object.keys(s);
 out.push(`update public.site_settings set\n${cols.map((c) => `  ${c} = ${lit(s[c])}`).join(",\n")}\nwhere id = 1;\n`);
 
 // Services
-out.push(`insert into public.services (title, short_description, description, image_url, deliverables, display_order)
+if (content.services.length) out.push(`insert into public.services (title, short_description, description, image_url, deliverables, display_order)
 select * from (values
 ${content.services
   .map((v, i) => `  (${lit(v.title)}, ${lit(v.short_description)}, ${lit(v.description)}, ${lit(v.image_url)}, ${lit(v.deliverables)}, ${i + 1})`)
@@ -39,7 +39,7 @@ where not exists (select 1 from public.services);
 `);
 
 // Clients
-out.push(`insert into public.clients (name, logo_url, website_url, display_order)
+if (content.clients.length) out.push(`insert into public.clients (name, logo_url, website_url, display_order)
 select * from (values
 ${content.clients.map((v, i) => `  (${lit(v.name)}, ${lit(v.logo_url)}::text, ${lit(v.website_url)}::text, ${i + 1})`).join(",\n")}
 ) as v(name, logo_url, website_url, display_order)

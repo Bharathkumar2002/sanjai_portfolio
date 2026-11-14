@@ -4,11 +4,22 @@ export type SiteSettings = {
   brand_name: string;
   designer_name: string;
   role_title: string;
+  /** Current workplace, e.g. "Canto". */
+  workplace: string;
   hero_greeting: string;
   hero_headline: string;
   hero_tagline: string;
   hero_intro: string;
+  /** Front photo in the banner. */
   hero_image: string | null;
+  /** Low-opacity artwork layered behind the banner photo. */
+  hero_background_image: string | null;
+  /** Photo for the contact section; falls back to hero_image. */
+  contact_image: string | null;
+  resume_url: string | null;
+  resume_file_name: string | null;
+  resume_size_bytes: number | null;
+  resume_updated_at: string | null;
   about_eyebrow: string;
   about_headline: string;
   about_intro: string;
@@ -21,6 +32,7 @@ export type SiteSettings = {
   clients_served: number | null;
   availability: string;
   contact_email: string;
+  /** Mobile number. */
   contact_phone: string;
   location: string;
   instagram_url: string;

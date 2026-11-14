@@ -79,19 +79,26 @@ const submit = (email, message, ip = null) =>
 // ---------------------------------------------------------------- tests
 console.log("\nSeed & defaults");
 eq("site_settings has exactly one row", await count(`select count(*) n from public.site_settings`), 1);
-eq("seeded projects", await count(`select count(*) n from public.projects`), 8);
-eq("seeded services", await count(`select count(*) n from public.services`), 6);
+eq("seeded projects (exactly four samples)", await count(`select count(*) n from public.projects`), 4);
+eq("seeded services", await count(`select count(*) n from public.services`), 4);
+eq("workplace defaults to Canto", (await q(`select workplace from public.site_settings`))[0].workplace, "Canto");
+eq("name is a clear placeholder", (await q(`select designer_name from public.site_settings`))[0].designer_name, "[Your Name]");
+eq("mobile is a clear placeholder", (await q(`select contact_phone from public.site_settings`))[0].contact_phone, "[Mobile number]");
+eq("résumé metadata seeded", (await q(`select resume_file_name from public.site_settings`))[0].resume_file_name, "resume-placeholder.pdf");
+eq("media bucket accepts PDF résumés", (await q(`select 'application/pdf' = any(allowed_mime_types) ok from storage.buckets where id = 'media'`))[0].ok, true);
+await expectError("résumé larger than 10 MB is rejected", () => q(`update public.site_settings set resume_size_bytes = 20000000`));
 eq("viewer profile auto-created by trigger", await count(`select count(*) n from public.profiles where id = $1 and role = 'viewer'`, [VIEWER]), 1);
 await expectError("second site_settings row is rejected", () => q(`insert into public.site_settings (id) values (2)`));
 await expectError("invalid slug is rejected", () => q(`insert into public.projects (title, slug, category) values ('X', 'Bad Slug!', 'Branding')`));
 
-await db.exec(`update public.projects set is_published = false where slug = 'kiln-ceramics'`);
+await db.exec(`insert into public.project_images (project_id, image_url) select id, '/portfolio/x.webp' from public.projects where slug = 'laptop-concept';
+  update public.projects set is_published = false where slug = 'laptop-concept'`);
 
 console.log("\nAnonymous visitor");
 await as("anon", null, async () => {
-  eq("sees only published projects", await count(`select count(*) n from public.projects`), 7);
+  eq("sees only published projects", await count(`select count(*) n from public.projects`), 3);
   eq("cannot see gallery of unpublished project",
-    await count(`select count(*) n from public.project_images pi join public.projects p on p.id = pi.project_id where p.slug = 'kiln-ceramics'`), 0);
+    await count(`select count(*) n from public.project_images pi join public.projects p on p.id = pi.project_id where p.slug = 'laptop-concept'`), 0);
   eq("can read site settings", await count(`select count(*) n from public.site_settings`), 1);
   eq("cannot read contact messages", await count(`select count(*) n from public.contact_messages`), 0);
   eq("cannot read profiles", await count(`select count(*) n from public.profiles`).catch(() => 0), 0);
@@ -115,7 +122,7 @@ await as("anon", null, async () => {
 
 console.log("\nSigned-in non-admin");
 await as("authenticated", VIEWER, async () => {
-  eq("sees only published projects", await count(`select count(*) n from public.projects`), 7);
+  eq("sees only published projects", await count(`select count(*) n from public.projects`), 3);
   eq("cannot read contact messages", await count(`select count(*) n from public.contact_messages`), 0);
   eq("reads only own profile", await count(`select count(*) n from public.profiles`), 1);
   await expectError("cannot insert projects", () => q(`insert into public.projects (title, slug, category) values ('Hack', 'hack', 'x')`));
@@ -127,17 +134,17 @@ await as("authenticated", VIEWER, async () => {
   await expectError("cannot insert contact messages directly", () =>
     q(`insert into public.contact_messages (name, email, subject, message) values ('Eve', 'e@x.io', 'Hi there', 'direct insert attempt')`));
   await expectError("cannot replace a gallery", () =>
-    q(`select public.replace_project_images((select id from public.projects where slug = 'lumen-skincare'), '[]'::jsonb)`), "forbidden");
+    q(`select public.replace_project_images((select id from public.projects where slug = 'kova-glide-low'), '[]'::jsonb)`), "forbidden");
 });
 await as("anon", null, async () => {
   await expectError("anon cannot call replace_project_images", () =>
-    q(`select public.replace_project_images((select id from public.projects where slug = 'lumen-skincare'), '[]'::jsonb)`));
+    q(`select public.replace_project_images((select id from public.projects where slug = 'kova-glide-low'), '[]'::jsonb)`));
 });
 eq("viewer is still a viewer", (await q(`select role from public.profiles where id = $1`, [VIEWER]))[0].role, "viewer");
 
 console.log("\nAdmin");
 await as("authenticated", ADMIN, async () => {
-  eq("sees all projects incl. unpublished", await count(`select count(*) n from public.projects`), 8);
+  eq("sees all projects incl. unpublished", await count(`select count(*) n from public.projects`), 4);
   eq("reads contact messages", await count(`select count(*) n from public.contact_messages`), 5);
   await expectOk("creates a project", () => q(`insert into public.projects (title, slug, category, is_published) values ('New', 'new-project', 'Branding', false)`));
   await expectOk("adds gallery images", () => q(`insert into public.project_images (project_id, image_url) select id, 'https://x.supabase.co/a.png' from public.projects where slug = 'new-project'`));
@@ -153,6 +160,8 @@ await as("authenticated", ADMIN, async () => {
     await count(`select count(*) n from public.project_images pi join public.projects p on p.id = pi.project_id where p.slug = 'new-project'`), 2);
   await expectOk("updates settings", () => q(`update public.site_settings set brand_name = 'Studio'`));
   await expectOk("marks a message read", () => q(`update public.contact_messages set is_read = true where email = 'bob@example.com'`));
+  await expectOk("uploads a résumé to the resume folder", () => q(`insert into storage.objects (bucket_id, name) values ('media', 'resume/2026/cv.pdf')`));
+  await expectOk("updates workplace and mobile", () => q(`update public.site_settings set workplace = 'Canto', contact_phone = '+91 90000 00000'`));
   await expectOk("uploads to an allowed folder", () => q(`insert into storage.objects (bucket_id, name) values ('media', 'projects/2026/a.png')`));
   await expectError("cannot upload outside allowed folders", () => q(`insert into storage.objects (bucket_id, name) values ('media', 'other/a.png')`));
   await expectOk("deletes a project (cascades images)", () => q(`delete from public.projects where slug = 'new-project'`));
@@ -160,10 +169,10 @@ await as("authenticated", ADMIN, async () => {
   await expectOk("deletes a message", () => q(`delete from public.contact_messages where email = 'cy@example.com'`));
 });
 eq("settings update persisted", (await q(`select brand_name from public.site_settings`))[0].brand_name, "Studio");
-const before = (await q(`select updated_at from public.projects where slug = 'lumen-skincare'`))[0].updated_at;
+const before = (await q(`select updated_at from public.projects where slug = 'kova-glide-low'`))[0].updated_at;
 await new Promise((r) => setTimeout(r, 20));
-await db.exec(`update public.projects set title = 'Lumen Skincare' where slug = 'lumen-skincare'`);
-const after = (await q(`select updated_at from public.projects where slug = 'lumen-skincare'`))[0].updated_at;
+await db.exec(`update public.projects set title = 'Kova Glide Low' where slug = 'kova-glide-low'`);
+const after = (await q(`select updated_at from public.projects where slug = 'kova-glide-low'`))[0].updated_at;
 after > before ? pass("updated_at trigger bumps timestamp") : fail("updated_at trigger did not bump timestamp");
 
 console.log(failures ? `\n${failures} check(s) FAILED` : "\nAll database checks passed");

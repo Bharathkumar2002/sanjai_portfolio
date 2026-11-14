@@ -1,10 +1,12 @@
 import { getSupabaseBrowserClient } from "@/lib/supabase/client";
 import { MEDIA_BUCKET } from "@/lib/supabase/env";
 
-/** Must match allowed_mime_types / file_size_limit in supabase/migrations/*_storage.sql */
+/** Must match allowed_mime_types / file_size_limit in supabase/migrations. */
 export const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif", "image/svg+xml"];
-export const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
-export type MediaFolder = "projects" | "services" | "clients" | "site" | "profiles";
+export const ALLOWED_DOCUMENT_TYPES = ["application/pdf"];
+export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+export type MediaFolder = "projects" | "services" | "clients" | "site" | "profiles" | "resume";
+export type UploadKind = "image" | "pdf";
 
 const EXT: Record<string, string> = {
   "image/jpeg": "jpg",
@@ -13,11 +15,15 @@ const EXT: Record<string, string> = {
   "image/avif": "avif",
   "image/gif": "gif",
   "image/svg+xml": "svg",
+  "application/pdf": "pdf",
 };
 
-export function validateImage(file: File): string | null {
-  if (!ALLOWED_IMAGE_TYPES.includes(file.type)) return `${file.name}: use JPG, PNG, WebP, AVIF, GIF or SVG.`;
-  if (file.size > MAX_IMAGE_BYTES) return `${file.name} is larger than 10 MB.`;
+export function validateUpload(file: File, kind: UploadKind = "image"): string | null {
+  const allowed = kind === "pdf" ? ALLOWED_DOCUMENT_TYPES : ALLOWED_IMAGE_TYPES;
+  if (!allowed.includes(file.type)) {
+    return kind === "pdf" ? `${file.name}: please upload a PDF.` : `${file.name}: use JPG, PNG, WebP, AVIF, GIF or SVG.`;
+  }
+  if (file.size > MAX_UPLOAD_BYTES) return `${file.name} is larger than 10 MB.`;
   return null;
 }
 
@@ -25,8 +31,8 @@ export function validateImage(file: File): string | null {
  * Uploads straight from the browser to Supabase Storage using the signed-in
  * admin's session. Storage RLS only allows admins to write to the bucket.
  */
-export async function uploadImage(file: File, folder: MediaFolder): Promise<string> {
-  const invalid = validateImage(file);
+export async function uploadFile(file: File, folder: MediaFolder, kind: UploadKind = "image"): Promise<string> {
+  const invalid = validateUpload(file, kind);
   if (invalid) throw new Error(invalid);
 
   const path = `${folder}/${new Date().getFullYear()}/${crypto.randomUUID()}.${EXT[file.type]}`;
@@ -39,3 +45,5 @@ export async function uploadImage(file: File, folder: MediaFolder): Promise<stri
   if (error) throw new Error(`Upload failed: ${error.message}`);
   return storage.getPublicUrl(path).data.publicUrl;
 }
+
+export const uploadImage = (file: File, folder: MediaFolder) => uploadFile(file, folder, "image");

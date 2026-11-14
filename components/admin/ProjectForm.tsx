@@ -77,12 +77,12 @@ export function ProjectForm({ project, categories }: { project?: ProjectWithImag
         />
       </FormSection>
 
-      <FormSection title="Images" description="The cover appears on cards and at the top of the case study.">
-        <ImageUpload name="cover_image" label="Cover image" folder="projects" defaultValue={project?.cover_image} error={err("cover_image")} onChange={markDirty} hint="Landscape, at least 2000px wide works best." />
+      <FormSection title="Images" description="The main artwork appears on the home page and the project page. Extra images are optional.">
+        <ImageUpload name="cover_image" label="Main artwork" folder="projects" defaultValue={project?.cover_image} error={err("cover_image")} onChange={markDirty} hint="Portrait 4:5 (e.g. 1200 × 1500 px) fits the grid best." />
         <GalleryManager initial={project?.project_images ?? []} error={err("gallery")} onChange={markDirty} />
       </FormSection>
 
-      <FormSection title="Case study" description="Separate paragraphs with a blank line. Empty sections are hidden.">
+      <FormSection title="Story" description="Separate paragraphs with a blank line. Empty sections are hidden.">
         <TextAreaField name="description" label="Overview" rows={5} maxLength={10000} defaultValue={project?.description} error={err("description")} />
         <TextAreaField name="design_process" label="Design process" rows={5} maxLength={10000} defaultValue={project?.design_process} error={err("design_process")} />
         <TextAreaField name="challenges" label="Creative challenges" rows={4} maxLength={10000} defaultValue={project?.challenges} error={err("challenges")} />
@@ -90,8 +90,7 @@ export function ProjectForm({ project, categories }: { project?: ProjectWithImag
       </FormSection>
 
       <FormSection title="Visibility" description="Control where and whether this project appears.">
-        <ToggleField name="is_published" label="Published" description="Visible on the public website." defaultChecked={project?.is_published ?? false} />
-        <ToggleField name="is_featured" label="Featured" description="Shown in Featured Projects on the home page (up to 5)." defaultChecked={project?.is_featured ?? false} />
+        <ToggleField name="is_published" label="Published" description="Visible in the Work section of the website." defaultChecked={project?.is_published ?? false} />
         <TextField
           name="display_order"
           label="Display order"
@@ -99,7 +98,7 @@ export function ProjectForm({ project, categories }: { project?: ProjectWithImag
           inputMode="numeric"
           defaultValue={project?.display_order ?? ""}
           error={err("display_order")}
-          hint="Lower numbers appear first. Leave empty to add at the end. You can also reorder from the list."
+          hint="Lower numbers appear first. You can also reorder from the list."
           wrapperClassName="max-w-xs"
         />
       </FormSection>

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { isAllowedImageUrl, slugify } from "@/lib/utils";
+import { isAllowedMediaUrl, isPdfUrl, slugify } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ primitives */
 
@@ -34,7 +34,14 @@ const imageUrl = z
   .trim()
   .max(2048)
   .transform((v) => (v === "" ? null : v))
-  .refine((v) => v === null || isAllowedImageUrl(v), "Upload the image instead of linking to another site");
+  .refine((v) => v === null || (isAllowedMediaUrl(v) && !isPdfUrl(v)), "Upload the image instead of linking to another site");
+
+const resumeUrl = z
+  .string()
+  .trim()
+  .max(2048)
+  .transform((v) => (v === "" ? null : v))
+  .refine((v) => v === null || (isAllowedMediaUrl(v) && isPdfUrl(v)), "Upload the résumé as a PDF");
 
 const webUrl = z
   .string()
@@ -127,42 +134,49 @@ export const clientSchema = z.object({
 
 /* ------------------------------------------------------------------ settings */
 
-export const settingsSchema = z.object({
-  brand_name: requiredText("Brand name", 1, 60),
-  designer_name: requiredText("Designer name", 1, 80),
-  role_title: text(80),
-  hero_greeting: text(80),
-  hero_headline: requiredText("Hero headline", 1, 120),
-  hero_tagline: text(160),
-  hero_intro: text(600),
-  hero_image: imageUrl,
-  about_eyebrow: text(80),
-  about_headline: requiredText("About headline", 1, 200),
-  about_intro: text(1500),
-  about_bio: text(4000),
-  about_philosophy: text(2000),
-  about_experience: text(2000),
-  about_image: imageUrl,
-  years_experience: optionalInt(0, 80),
-  projects_completed: optionalInt(0, 100000),
-  clients_served: optionalInt(0, 100000),
-  availability: text(120),
-  contact_email: z
-    .string()
-    .trim()
-    .max(254)
-    .refine((v) => v === "" || z.email().safeParse(v).success, "Enter a valid email address"),
-  contact_phone: text(40),
-  location: text(120),
-  instagram_url: webUrl,
-  behance_url: webUrl,
-  linkedin_url: webUrl,
-  dribbble_url: webUrl,
-  x_url: webUrl,
-  seo_title: text(120),
-  seo_description: text(320),
-  og_image: imageUrl,
-});
+/**
+ * Fields edited on the dashboard's Profile page. Columns not listed here are
+ * left untouched by the upsert.
+ */
+export const settingsSchema = z
+  .object({
+    designer_name: requiredText("Name", 1, 80),
+    role_title: text(80),
+    workplace: text(120),
+    contact_phone: text(40),
+    contact_email: z
+      .string()
+      .trim()
+      .max(254)
+      .refine((v) => v === "" || z.email().safeParse(v).success, "Enter a valid email address"),
+    location: text(120),
+    availability: text(120),
+
+    hero_headline: requiredText("Banner headline", 1, 120),
+    hero_intro: text(600),
+    hero_image: imageUrl,
+    hero_background_image: imageUrl,
+    contact_image: imageUrl,
+
+    resume_url: resumeUrl,
+    resume_file_name: nullableText(200),
+    resume_size_bytes: optionalInt(0, 10 * 1024 * 1024),
+
+    about_headline: requiredText("About headline", 1, 200),
+    about_intro: text(1500),
+    about_bio: text(4000),
+
+    instagram_url: webUrl,
+    behance_url: webUrl,
+    linkedin_url: webUrl,
+    dribbble_url: webUrl,
+    x_url: webUrl,
+    seo_title: text(120),
+    seo_description: text(320),
+    og_image: imageUrl,
+  })
+  // The logo and footer use the brand name; keep it in sync with the name.
+  .transform((v) => ({ ...v, brand_name: v.designer_name }));
 
 /* ------------------------------------------------------------------ helpers */
 

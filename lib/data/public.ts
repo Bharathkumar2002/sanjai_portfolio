@@ -56,20 +56,6 @@ export const getClients = cache(async (): Promise<Client[]> => {
   return data ?? [];
 });
 
-export const getFeaturedProjects = cache(async (limit = 5): Promise<ProjectSummary[]> => {
-  if (!isSupabaseConfigured) return demoProjects.filter((p) => p.is_featured).slice(0, limit);
-  const { data, error } = await createSupabasePublicClient()
-    .from("projects")
-    .select(SUMMARY_COLUMNS)
-    .eq("is_published", true)
-    .eq("is_featured", true)
-    .order("display_order")
-    .order("created_at", { ascending: false })
-    .limit(limit);
-  if (error) fail("featured projects", error);
-  return data ?? [];
-});
-
 export const getPublishedProjects = cache(async (): Promise<ProjectSummary[]> => {
   if (!isSupabaseConfigured) return demoProjects;
   const { data, error } = await createSupabasePublicClient()

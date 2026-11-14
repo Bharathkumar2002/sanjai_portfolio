@@ -87,7 +87,7 @@ export function Navbar({ brandName, socials, email }: Props) {
 
             <ul className="hidden items-center gap-1 md:flex">
               {NAV_LINKS.map((link) => {
-                const isActive = isHome ? active === link.id : link.id === "projects" && pathname.startsWith("/projects");
+                const isActive = isHome ? active === link.id : link.id === "work" && pathname.startsWith("/projects");
                 return (
                   <li key={link.id}>
                     <Link

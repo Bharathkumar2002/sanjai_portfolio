@@ -99,10 +99,10 @@ export function ContactForm({ projectTypes }: { projectTypes: string[] }) {
           <button
             type="submit"
             disabled={pending}
-            className="group inline-flex items-center gap-3 rounded-full bg-ember-500 py-2 pl-6 pr-2 text-[15px] font-medium text-white transition-colors hover:bg-ember-600 disabled:cursor-not-allowed disabled:opacity-70"
+            className="group inline-flex items-center gap-3 rounded-full bg-ember-500 py-2 pl-6 pr-2 text-[15px] font-semibold text-ink-950 transition-colors hover:bg-ember-400 disabled:cursor-not-allowed disabled:opacity-70"
           >
             {pending ? "Sending…" : "Send message"}
-            <span className="grid size-10 place-items-center rounded-full bg-white text-ember-600 transition-transform duration-500 group-hover:rotate-45">
+            <span className="grid size-10 place-items-center rounded-full bg-ink-950 text-ember-400 transition-transform duration-500 group-hover:rotate-45 motion-reduce:transition-none">
               {pending ? <Spinner size={16} /> : <ArrowUpRight size={18} />}
             </span>
           </button>

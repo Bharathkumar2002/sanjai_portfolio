@@ -6,13 +6,13 @@ import { ArrowUpRight } from "./icons";
 type Variant = "light" | "accent" | "outline" | "dark";
 
 const styles: Record<Variant, { pill: string; dot: string }> = {
-  light: { pill: "bg-bone text-ink-950 hover:bg-white", dot: "bg-ember-500 text-white" },
-  accent: { pill: "bg-ember-500 text-white hover:bg-ember-600", dot: "bg-white text-ember-600" },
+  light: { pill: "bg-bone text-ink-950 hover:bg-white", dot: "bg-ink-950 text-bone" },
+  accent: { pill: "bg-ember-500 text-ink-950 hover:bg-ember-400", dot: "bg-ink-950 text-ember-400" },
   outline: {
     pill: "bg-white/5 text-bone ring-1 ring-inset ring-white/25 backdrop-blur-md hover:bg-white/10",
     dot: "bg-white/15 text-white",
   },
-  dark: { pill: "bg-ink-950 text-bone hover:bg-black", dot: "bg-ember-500 text-white" },
+  dark: { pill: "bg-ink-950 text-bone hover:bg-black", dot: "bg-ember-500 text-ink-950" },
 };
 
 type Props = Omit<ComponentProps<typeof Link>, "children"> & {

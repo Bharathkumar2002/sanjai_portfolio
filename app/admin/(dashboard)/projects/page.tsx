@@ -2,7 +2,7 @@ import { getAdminPageSession } from "@/lib/admin/auth";
 import { EmptyState, ErrorNotice, PageHeader, PrimaryLink } from "@/components/admin/ui";
 import { ProjectsTable } from "@/components/admin/ProjectsTable";
 
-export const metadata = { title: "Projects" };
+export const metadata = { title: "Portfolio" };
 
 export default async function AdminProjectsPage() {
   const session = await getAdminPageSession();
@@ -17,17 +17,17 @@ export default async function AdminProjectsPage() {
   return (
     <>
       <PageHeader
-        title="Projects"
-        description="Add case studies, choose what's featured on the home page and set the order they appear in."
-        action={<PrimaryLink href="/admin/projects/new">New project</PrimaryLink>}
+        title="Portfolio"
+        description="The samples in the Work section. Replace artwork, edit the story, publish or hide, and set the order."
+        action={<PrimaryLink href="/admin/projects/new">Add sample</PrimaryLink>}
       />
       {error ? (
         <ErrorNotice message={error.message} />
       ) : data.length === 0 ? (
         <EmptyState
-          title="No projects yet"
+          title="No samples yet"
           description="Your portfolio will show a friendly placeholder until you publish your first project."
-          action={<PrimaryLink href="/admin/projects/new">Create your first project</PrimaryLink>}
+          action={<PrimaryLink href="/admin/projects/new">Add your first sample</PrimaryLink>}
         />
       ) : (
         <ProjectsTable projects={data} />

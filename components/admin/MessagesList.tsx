@@ -57,7 +57,7 @@ export function MessagesList({ messages }: { messages: ContactMessage[] }) {
                 <div className="mt-5 flex items-center gap-2">
                   <a
                     href={`mailto:${m.email}?subject=${encodeURIComponent(`Re: ${m.subject}`)}`}
-                    className="rounded-full bg-ember-500 px-4 py-2 text-xs font-medium text-white hover:bg-ember-600"
+                    className="rounded-full bg-ember-500 px-4 py-2 text-xs font-medium text-ink-950 hover:bg-ember-400"
                   >
                     Reply by email
                   </a>

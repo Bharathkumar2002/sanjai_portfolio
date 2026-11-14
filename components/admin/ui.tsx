@@ -54,7 +54,7 @@ export function PrimaryLink({ href, children }: { href: string; children: ReactN
   return (
     <Link
       href={href}
-      className="inline-flex items-center gap-2 self-start rounded-full bg-ember-500 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-ember-600"
+      className="inline-flex items-center gap-2 self-start rounded-full bg-ember-500 px-5 py-2.5 text-sm font-medium text-ink-950 transition-colors hover:bg-ember-400"
     >
       <PlusIcon size={16} />
       {children}

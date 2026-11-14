@@ -19,7 +19,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       >
         Skip to content
       </a>
-      <Navbar brandName={settings.brand_name} socials={socialLinks(settings)} email={settings.contact_email} />
+      <Navbar brandName={settings.designer_name} socials={socialLinks(settings)} email={settings.contact_email} />
       <main id="main" tabIndex={-1} className="outline-none">
         {children}
       </main>

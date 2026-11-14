@@ -7,7 +7,7 @@ import { useRunAction } from "@/lib/hooks/useRunAction";
 import type { Project } from "@/lib/types";
 import { Badge, Card } from "./ui";
 import { DeleteButton, EditLink, IconButton, OrderButtons } from "./RowControls";
-import { ExternalIcon, EyeIcon, EyeOffIcon, ImageIcon, StarIcon } from "@/components/ui/icons";
+import { ExternalIcon, EyeIcon, EyeOffIcon, ImageIcon } from "@/components/ui/icons";
 
 type Row = Pick<Project, "id" | "title" | "slug" | "category" | "cover_image" | "project_year" | "is_featured" | "is_published">;
 
@@ -19,9 +19,9 @@ export function ProjectsTable({ projects }: { projects: Row[] }) {
       {projects.map((p, i) => (
         <div key={p.id} className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center">
           <div className="flex min-w-0 flex-1 items-center gap-4">
-            <div className="relative h-14 w-20 shrink-0 overflow-hidden rounded-xl bg-ink-800">
+            <div className="relative h-[70px] w-14 shrink-0 overflow-hidden rounded-xl bg-ink-800">
               {p.cover_image ? (
-                <Image src={p.cover_image} alt="" fill unoptimized sizes="80px" className="object-cover" />
+                <Image src={p.cover_image} alt="" fill unoptimized sizes="56px" className="object-cover" />
               ) : (
                 <span className="grid h-full place-items-center text-white/20"><ImageIcon size={20} /></span>
               )}
@@ -34,20 +34,11 @@ export function ProjectsTable({ projects }: { projects: Row[] }) {
                 <span>{p.category}</span>
                 {p.project_year && <span>· {p.project_year}</span>}
                 <span className="ml-1">{p.is_published ? <Badge tone="success">Published</Badge> : <Badge tone="muted">Draft</Badge>}</span>
-                {p.is_featured && <Badge tone="accent">Featured</Badge>}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-0.5 self-end sm:self-auto">
             <OrderButtons name={p.title} index={i} total={projects.length} disabled={isPending} onMove={(dir) => run(`move-${p.id}`, () => moveProject(p.id, dir), { quiet: true })} />
-            <IconButton
-              label={p.is_featured ? `Remove ${p.title} from featured` : `Feature ${p.title}`}
-              active={p.is_featured}
-              disabled={isBusy(`feat-${p.id}`)}
-              onClick={() => run(`feat-${p.id}`, () => setProjectFlag(p.id, "is_featured", !p.is_featured))}
-            >
-              <StarIcon size={16} filled={p.is_featured} />
-            </IconButton>
             <IconButton
               label={p.is_published ? `Unpublish ${p.title}` : `Publish ${p.title}`}
               disabled={isBusy(`pub-${p.id}`)}

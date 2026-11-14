@@ -1,352 +1,134 @@
 {
-  "_note": "Placeholder content for development. All brands and clients below are fictional. Used by supabase/seed.sql (generated via `npm run db:seed`) and by the preview mode that runs when Supabase is not configured.",
+  "_note": "Initial content. Values in [brackets] are placeholders to replace from the dashboard. Images and the résumé point to bundled files in /public/portfolio until replaced (uploads go to Supabase Storage). Kova and Orbit are fictional brands. Used by supabase/seed.sql (npm run db:seed) and by preview mode when Supabase is not configured.",
   "settings": {
-    "brand_name": "Sanjai",
-    "designer_name": "Sanjai",
+    "brand_name": "[Your Name]",
+    "designer_name": "[Your Name]",
     "role_title": "Graphic Designer",
-    "hero_greeting": "Hey, I'm Sanjai —",
-    "hero_headline": "Creative\n*Designer*",
-    "hero_tagline": "Design should be felt before it is read.",
-    "hero_intro": "I craft bold brand identities, packaging and campaigns for companies that refuse to blend in — strategy-led, obsessively detailed and built to be remembered.",
-    "hero_image": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1400&q=80",
-    "about_eyebrow": "Behind the Designs",
-    "about_headline": "Creating Visual Experiences That Make Brands *Stand Out*",
-    "about_intro": "I'm a graphic designer who sits at the meeting point of strategy and craft. Every logo, label and layout starts with one question: what should people feel?",
-    "about_bio": "For the past six years I've partnered with founders, studios and growing teams to shape how their brands look, speak and move. My work spans identity systems, packaging, editorial and digital — always designed as one connected story rather than a pile of separate assets.",
-    "about_philosophy": "Good design is quiet confidence. I strip ideas back to what matters, then push the details until they feel inevitable. Bold where it counts, restrained everywhere else.",
-    "about_experience": "Specialised in brand identity and packaging, with deep experience in type, colour systems and art direction for launches across food & beverage, beauty, fashion and tech.",
-    "about_image": "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&w=1400&q=80",
-    "years_experience": 6,
-    "projects_completed": 120,
-    "clients_served": 45,
-    "availability": "Booking new projects now",
+    "workplace": "Canto",
+    "hero_greeting": "Hi, I'm",
+    "hero_headline": "Designing bold visuals that *people remember.*",
+    "hero_tagline": "",
+    "hero_intro": "I'm a graphic designer creating product posters, social campaigns and brand visuals — clear ideas, crafted down to the last pixel.",
+    "hero_image": "/portfolio/profile-photo.webp",
+    "hero_background_image": "/portfolio/editor-artwork.webp",
+    "contact_image": null,
+    "about_eyebrow": "About",
+    "about_headline": "Turning ideas into visuals that *work hard and look good.*",
+    "about_intro": "I design for brands that want to be noticed — from launch posters and social creatives to complete visual identities.",
+    "about_bio": "I enjoy the full journey of a design: understanding the product, finding the one idea worth saying, and then obsessing over type, colour and composition until it feels effortless.\n\nMy toolkit spans Photoshop, Illustrator, InDesign, After Effects, Figma and Blender, which lets me move comfortably between print, digital and motion.",
+    "about_philosophy": "",
+    "about_experience": "",
+    "about_image": null,
+    "years_experience": null,
+    "projects_completed": null,
+    "clients_served": null,
+    "availability": "Open to freelance projects",
     "contact_email": "hello@example.com",
-    "contact_phone": "",
-    "location": "Working worldwide, remotely",
-    "instagram_url": "https://www.instagram.com/",
-    "behance_url": "https://www.behance.net/",
-    "linkedin_url": "https://www.linkedin.com/",
-    "dribbble_url": "https://dribbble.com/",
+    "contact_phone": "[Mobile number]",
+    "location": "",
+    "instagram_url": "",
+    "behance_url": "",
+    "linkedin_url": "",
+    "dribbble_url": "",
     "x_url": "",
-    "seo_title": "Sanjai — Graphic Designer & Brand Identity Specialist",
-    "seo_description": "Portfolio of Sanjai, a graphic designer crafting brand identities, packaging, posters and digital experiences for ambitious brands.",
-    "og_image": null
+    "seo_title": "Graphic Designer Portfolio",
+    "seo_description": "Graphic design portfolio featuring product posters, social media creatives and brand visuals.",
+    "og_image": "/portfolio/work-shoe.webp",
+    "resume_url": "/portfolio/resume-placeholder.pdf",
+    "resume_file_name": "resume-placeholder.pdf",
+    "resume_size_bytes": 88784
   },
   "services": [
     {
-      "title": "Brand Identity Design",
-      "short_description": "Identity systems with a point of view.",
-      "description": "From positioning workshops to the final brand book, I build complete identity systems — logo, typography, colour, voice and the rules that keep everything consistent as your brand grows.",
-      "image_url": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "Brand strategy",
-        "Logo suite",
-        "Colour & type system",
-        "Brand guidelines",
-        "Stationery"
-      ]
+      "title": "Product posters & ads",
+      "short_description": "Launch visuals that make a product the hero.",
+      "description": "Campaign key visuals and product posters for print, retail and digital — built around one clear message.",
+      "image_url": null,
+      "deliverables": ["Key visuals", "Product posters", "Ad variations"]
     },
     {
-      "title": "Logo Design",
-      "short_description": "Marks that work at every size.",
-      "description": "Distinctive, timeless logos designed to scale from a favicon to a billboard. Every mark is tested in context, refined on the grid and delivered with a full set of lock-ups.",
-      "image_url": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "Primary & secondary marks",
-        "Monogram / icon",
-        "Responsive lock-ups",
-        "Usage guide"
-      ]
+      "title": "Social media creatives",
+      "short_description": "Scroll-stopping, on-brand content.",
+      "description": "Post and story systems, campaign assets and templates that keep a feed consistent week after week.",
+      "image_url": null,
+      "deliverables": ["Post & story designs", "Templates", "Carousel layouts"]
     },
     {
-      "title": "Social Media Creatives",
-      "short_description": "Scroll-stopping content systems.",
-      "description": "Templates, campaign visuals and motion-ready assets that keep your feed on-brand without starting from zero each week. Built for Instagram, LinkedIn, TikTok and beyond.",
-      "image_url": "https://images.unsplash.com/photo-1617791160505-6f00504e3519?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "Campaign key visuals",
-        "Post & story templates",
-        "Ad creatives",
-        "Content grid planning"
-      ]
+      "title": "Brand identity",
+      "short_description": "Logos and visual systems with a point of view.",
+      "description": "Logo, colour, typography and guidelines that hold a brand together across every touchpoint.",
+      "image_url": null,
+      "deliverables": ["Logo suite", "Colour & type", "Brand guidelines"]
     },
     {
-      "title": "Packaging Design",
-      "short_description": "Shelf presence that sells.",
-      "description": "Packaging that earns attention on crowded shelves and feels premium in hand — from structure and materials to labels, dielines and print-ready production files.",
-      "image_url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "Label & box design",
-        "Dielines",
-        "3D mockups",
-        "Print production"
-      ]
-    },
-    {
-      "title": "Poster & Print Design",
-      "short_description": "Print that people keep.",
-      "description": "Posters, editorial layouts, brochures and event collateral with strong typography and careful attention to paper, finishes and colour accuracy.",
-      "image_url": "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "Posters",
-        "Brochures & catalogues",
-        "Event collateral",
-        "Pre-press files"
-      ]
-    },
-    {
-      "title": "UI/UX Design",
-      "short_description": "Interfaces with brand DNA.",
-      "description": "Clean, intuitive interfaces that carry your brand into product. Research-informed flows, design systems and high-fidelity prototypes ready for developers.",
-      "image_url": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1400&q=80",
-      "deliverables": [
-        "User flows",
-        "Wireframes",
-        "UI design system",
-        "Interactive prototypes"
-      ]
+      "title": "Print & packaging",
+      "short_description": "Designs that feel good in hand.",
+      "description": "Brochures, labels and packaging prepared carefully for production, from mockup to print-ready files.",
+      "image_url": null,
+      "deliverables": ["Packaging", "Brochures", "Print-ready files"]
     }
   ],
-  "clients": [
-    {
-      "name": "Northwind",
-      "logo_url": null,
-      "website_url": null
-    },
-    {
-      "name": "Lumen Labs",
-      "logo_url": null,
-      "website_url": null
-    },
-    {
-      "name": "Halcyon",
-      "logo_url": null,
-      "website_url": null
-    },
-    {
-      "name": "Ember & Co.",
-      "logo_url": null,
-      "website_url": null
-    },
-    {
-      "name": "Vantage",
-      "logo_url": null,
-      "website_url": null
-    },
-    {
-      "name": "Orbit",
-      "logo_url": null,
-      "website_url": null
-    }
-  ],
+  "clients": [],
   "projects": [
     {
-      "title": "Ember Coffee Roasters",
-      "slug": "ember-coffee-roasters",
-      "category": "Branding",
-      "short_description": "A warm, crafted identity for a small-batch roastery growing into its first café.",
-      "description": "Ember is an independent roastery that had outgrown its hand-drawn logo. They needed an identity that felt as considered as their coffee — premium without losing the warmth that regulars loved.\n\nThe new system is built around a glowing 'ember' mark, a roasted colour palette and a confident serif paired with a utilitarian grotesk for menus and labels.",
-      "cover_image": "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Ember Coffee (concept)",
-      "project_year": 2025,
-      "design_process": "We began with a two-day immersion at the roastery — tasting, photographing and interviewing staff and regulars. Three territories were explored: heritage, craft and warmth. Warmth won, and the ember mark grew out of sketches of glowing coals inside the roaster drum.\n\nThe palette was sampled directly from roast stages, from green bean to dark roast.",
-      "challenges": "The brand had to work on everything from a 30mm coffee bag label to a 6-metre café wall. The mark was redrawn three times to keep its glow legible at small sizes on kraft paper.",
-      "outcome": "The rebrand launched alongside the first café. Bag sales grew steadily over the following quarter and the identity has since extended to merchandise and a subscription service without needing new rules.",
+      "title": "Kova Glide Low",
+      "slug": "kova-glide-low",
+      "category": "Footwear campaign",
+      "short_description": "A launch poster for a lightweight everyday sneaker.",
+      "description": "A launch poster for Kova, a fictional sneaker brand. The brief: introduce the Glide Low as the lightest shoe in the range, with a confident, sporty voice.\n\nOversized condensed type sits behind the product so the shoe can break out of the frame, while a lime price badge and short feature list keep the essentials easy to scan.",
+      "cover_image": "/portfolio/work-shoe.webp",
+      "client_name": "Concept project",
+      "project_year": 2026,
+      "design_process": "I started with silhouette studies to get a sneaker that reads instantly at thumbnail size, then built a cobalt, lime and warm-cream palette that stays energetic without shouting.",
+      "challenges": "Balancing a very large headline with the product illustration — the type had to feel bold while the shoe remained the clear focal point.",
+      "outcome": "A poster system with a reusable layout for future colourways and seasonal drops.",
       "is_featured": true,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Latte art in branded cups on a café table"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Coffee cup and cookies styled for the brand shoot"
-        }
-      ]
+      "images": []
     },
     {
-      "title": "Lumen Skincare",
-      "slug": "lumen-skincare",
-      "category": "Packaging",
-      "short_description": "Minimal, sculptural packaging for a clean-beauty line built on light.",
-      "description": "Lumen is a clean skincare line built around light-activated botanicals. The packaging needed to communicate purity and efficacy while standing apart from the sea of white minimalism in the category.",
-      "cover_image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Lumen Labs (concept)",
-      "project_year": 2025,
-      "design_process": "I studied how light falls across glass and paper, then translated it into a system of soft gradients printed on uncoated stock. Typography was kept surgical and small so the product itself became the hero.",
-      "challenges": "Achieving a consistent gradient across glass, paper and plastic substrates required close collaboration with three different printers and multiple rounds of proofs.",
-      "outcome": "A cohesive range of nine products with a modular label system that lets the team launch new SKUs in days instead of weeks.",
+      "title": "Orbit Pulse 2",
+      "slug": "orbit-pulse-2",
+      "category": "Smartwatch launch",
+      "short_description": "A calm, premium launch visual for a fitness smartwatch.",
+      "description": "A product launch visual for Orbit, a fictional wearables brand. The goal was to present health features clearly while keeping the mood premium and calm.\n\nA midnight gradient, a coral strap and thin callout lines guide the eye from the headline to the key features and the specs below.",
+      "cover_image": "/portfolio/work-watch.webp",
+      "client_name": "Concept project",
+      "project_year": 2026,
+      "design_process": "I mapped the information hierarchy first — name, promise, three features, three specs — then designed the watch face and activity rings to echo the brand colours.",
+      "challenges": "Showing several features without clutter. Grouped callouts and a single accent colour keep the layout readable.",
+      "outcome": "A launch visual that adapts easily to social posts and web banners.",
       "is_featured": true,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Matte refillable bottle from the range"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Soft gradient light study used for the label artwork"
-        }
-      ]
+      "images": []
     },
     {
-      "title": "Northwind Outerwear",
-      "slug": "northwind-outerwear",
-      "category": "Branding",
-      "short_description": "A rugged, monochrome identity for a technical outerwear label.",
-      "description": "Northwind makes technical outerwear for city commuters. The brand needed to feel engineered and durable, while still fitting into a fashion context.",
-      "cover_image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Northwind (concept)",
-      "project_year": 2024,
-      "design_process": "The identity borrows from topographic maps and garment care labels. A custom stencil wordmark is paired with a strict monochrome palette and a grid of technical callouts used across tags, packaging and e-commerce.",
-      "challenges": "The label system had to survive washing, stitching and heat transfer — every element was tested on real fabric before sign-off.",
-      "outcome": "A complete identity including hang tags, woven labels, shipping boxes and a lookbook that set the tone for the brand's first collection.",
-      "is_featured": true,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Bomber jacket held on a hanger"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Row of shirts on hangers"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Clothing rail styled for the lookbook"
-        }
-      ]
-    },
-    {
-      "title": "Pulse Audio Launch",
-      "slug": "pulse-audio-launch",
-      "category": "Social Media Design",
-      "short_description": "A bold launch campaign system for a new range of wireless headphones.",
-      "description": "Pulse needed a launch campaign for its first over-ear headphones that could run across paid social, organic content and retail screens for six weeks without feeling repetitive.",
-      "cover_image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Pulse (concept)",
-      "project_year": 2025,
-      "design_process": "The campaign is built on a single idea — 'hear the colour'. Each product colourway gets its own sound-wave typographic treatment, generated from real audio and set in a modular template system.",
-      "challenges": "Creating enough variety for 60+ assets while keeping production fast. The answer was a component-based template library the in-house team could remix.",
-      "outcome": "Over sixty launch assets delivered in two weeks, plus a template kit the team still uses for ongoing content.",
-      "is_featured": true,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Headphones on a white desk with keyboard and mouse"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Wired headphones on a white background"
-        }
-      ]
-    },
-    {
-      "title": "Chroma Festival Posters",
-      "slug": "chroma-festival-posters",
-      "category": "Poster Design",
-      "short_description": "A fluid, generative poster series for a weekend art & music festival.",
-      "description": "Chroma is a weekend festival celebrating experimental art and electronic music. The poster series needed to feel alive and unpredictable — no two pieces the same.",
-      "cover_image": "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=2000&q=80",
+      "title": "Headset concept",
+      "slug": "headset-concept",
+      "category": "Audio product",
+      "short_description": "Placeholder — replace with the final headset design.",
+      "description": "Placeholder sample. Replace this image and text with the final headset design from the dashboard (Portfolio → Headset concept).",
+      "cover_image": "/portfolio/work-headset-placeholder.webp",
       "client_name": null,
-      "project_year": 2024,
-      "design_process": "I combined hand-poured acrylic textures with a rigid typographic grid. Each poster pairs a unique pour with the same structural layout so the series reads as one family.",
-      "challenges": "Reproducing the depth of fluid colour in screen print and risograph without losing vibrancy.",
-      "outcome": "A series of twelve posters, festival wayfinding and a limited print run that sold out at the merch stand.",
+      "project_year": 2026,
+      "design_process": "",
+      "challenges": "",
+      "outcome": "",
       "is_featured": true,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Fluid acrylic artwork in yellow, black and white"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Swirling red and teal ink artwork"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Colourful ink clouds in water"
-        }
-      ]
+      "images": []
     },
     {
-      "title": "Orbit Money App",
-      "slug": "orbit-money-app",
-      "category": "UI/UX Design",
-      "short_description": "A friendly budgeting app that makes money feel less intimidating.",
-      "description": "Orbit helps first-time earners understand where their money goes. The challenge was making financial data approachable without making it feel like a toy.",
-      "cover_image": "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Orbit (concept)",
-      "project_year": 2024,
-      "design_process": "Research interviews with twelve young professionals shaped a simple mental model: money orbits around goals. Wireframes were tested weekly before moving into a component-based UI system.",
-      "challenges": "Balancing playful visuals with the trust and clarity expected from a finance product.",
-      "outcome": "A 40-screen high-fidelity prototype and a design system with over 120 components handed off to the engineering team.",
-      "is_featured": false,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Hand sketching wireframes on paper"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Colourful printed wireframes laid out on a table"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Team mapping user flows with sticky notes"
-        }
-      ]
-    },
-    {
-      "title": "Kiln Ceramics",
-      "slug": "kiln-ceramics",
-      "category": "Logo Design",
-      "short_description": "A handcrafted mark for a ceramics studio and its workshop programme.",
-      "description": "Kiln is a ceramics studio running small-batch tableware and weekend workshops. They wanted a mark that felt handmade but worked across a website, stamps and glaze labels.",
-      "cover_image": "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=2000&q=80",
-      "client_name": "Kiln Studio (concept)",
-      "project_year": 2023,
-      "design_process": "Dozens of brush and clay-stamp explorations were digitised and refined. The final mark is a simple arch — the shape of the kiln door — with a slightly irregular edge.",
-      "challenges": "Keeping the handmade character while producing a clean vector that could be laser-cut into a clay stamp.",
-      "outcome": "A primary mark, monogram stamp and colour system now used on every piece that leaves the studio.",
-      "is_featured": false,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Colour swatches and design sketches on a desk"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Designer reviewing the identity on a laptop"
-        }
-      ]
-    },
-    {
-      "title": "Faces of the City",
-      "slug": "faces-of-the-city",
-      "category": "Illustration",
-      "short_description": "Large-scale portrait illustrations celebrating local creatives.",
-      "description": "A personal illustration series portraying the artists, makers and musicians who shape the city's creative scene — painted digitally and printed at mural scale.",
-      "cover_image": "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=2000&q=80",
+      "title": "Laptop concept",
+      "slug": "laptop-concept",
+      "category": "Tech product",
+      "short_description": "Placeholder — replace with the final laptop design.",
+      "description": "Placeholder sample. Replace this image and text with the final laptop design from the dashboard (Portfolio → Laptop concept).",
+      "cover_image": "/portfolio/work-laptop-placeholder.webp",
       "client_name": null,
-      "project_year": 2023,
-      "design_process": "Each subject was photographed in their own space, then reinterpreted with bold, expressive colour. Brush textures were scanned from real paint to keep the work tactile at large sizes.",
-      "challenges": "Making digital work hold up when printed six metres tall — every piece was built at print resolution from the start.",
-      "outcome": "Eight portraits exhibited in a pop-up gallery, with prints and postcards sold to support the featured artists.",
-      "is_featured": false,
-      "images": [
-        {
-          "image_url": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Paint brush with orange paint"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1553356084-58ef4a67b2a7?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Swirling blue and pink paint texture"
-        },
-        {
-          "image_url": "https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&w=2000&q=80",
-          "alt_text": "Abstract marbled paint in pastel colours"
-        }
-      ]
+      "project_year": 2026,
+      "design_process": "",
+      "challenges": "",
+      "outcome": "",
+      "is_featured": true,
+      "images": []
     }
   ]
 }

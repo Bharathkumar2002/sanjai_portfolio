@@ -18,7 +18,7 @@ export default function SiteError({ error, reset }: { error: Error & { digest?: 
           <button
             type="button"
             onClick={reset}
-            className="rounded-full bg-ember-500 px-6 py-3 text-sm font-medium text-white hover:bg-ember-600"
+            className="rounded-full bg-ember-500 px-6 py-3 text-sm font-medium text-ink-950 hover:bg-ember-400"
           >
             Try again
           </button>

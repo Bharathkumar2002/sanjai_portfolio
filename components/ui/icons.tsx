@@ -104,6 +104,15 @@ export const ExternalIcon = (p: IconProps) => (
 export const ImageIcon = (p: IconProps) => (
   <svg {...base(p)}><rect x="3" y="4" width="18" height="16" rx="3" /><circle cx="9" cy="10" r="2" /><path d="m21 16-5-5-9 9" /></svg>
 );
+export const DownloadIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M12 4v12M7 11l5 5 5-5M5 20h14" /></svg>
+);
+export const FileIcon = (p: IconProps) => (
+  <svg {...base(p)}><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></svg>
+);
+export const PhoneIcon = (p: IconProps) => (
+  <svg {...base(p)}><rect x="6" y="2.5" width="12" height="19" rx="3" /><path d="M10.5 18.5h3" /></svg>
+);
 export const Spinner = ({ size = 18, className = "" }: { size?: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" className={`animate-spin ${className}`} aria-hidden="true">
     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeOpacity=".25" strokeWidth="3" fill="none" />

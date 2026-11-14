@@ -27,8 +27,8 @@ export default async function AdminOverview() {
   const recentMessages = (recent.data ?? []) as Pick<ContactMessage, "id" | "name" | "email" | "subject" | "message" | "is_read" | "created_at">[];
 
   const stats = [
-    { label: "Projects", value: projects.count ?? 0, note: `${published.count ?? 0} published`, href: "/admin/projects", icon: LayersIcon },
-    { label: "Services", value: services.count ?? 0, note: "Shown on the home page", href: "/admin/services", icon: SparkIcon },
+    { label: "Portfolio samples", value: projects.count ?? 0, note: `${published.count ?? 0} published`, href: "/admin/projects", icon: LayersIcon },
+    { label: "Services", value: services.count ?? 0, note: "What I do section", href: "/admin/services", icon: SparkIcon },
     { label: "Client logos", value: clients.count ?? 0, note: "Trusted-by strip", href: "/admin/clients", icon: UsersIcon },
     { label: "Messages", value: messages.count ?? 0, note: `${unread.count ?? 0} unread`, href: "/admin/messages", icon: InboxIcon },
   ];
